@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import { getTopUsers } from '../lib/discourse';
+const topUsers = await getTopUsers(20);
+---
+<BaseLayout title="Especialistas" description="Os engenheiros e técnicos mais ativos no fórum Normatizado." canonical="/especialistas">
+  <Nav />
+  <main class="max-w-3xl mx-auto px-8 py-12">
+    <h1 class="text-3xl font-black text-grafite mb-2">Especialistas</h1>
+    <p class="text-gray-500 mb-8">Membros com maior contribuição técnica no fórum.</p>
+    {topUsers.length === 0 && (
+      <p class="text-gray-400 text-sm">Seja um dos primeiros especialistas. <a href="/forum/signup" class="text-blue hover:underline">Criar conta →</a></p>
+    )}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {topUsers.map((user, i) => (
+        <a href={`/forum/u/${user.username}`}
+           class="flex items-center gap-4 bg-white border border-border rounded-lg p-4 hover:border-blue transition-colors">
+          <div class={`w-12 h-12 rounded-full flex items-center justify-center text-white font-black text-sm flex-shrink-0
+            ${i < 3 ? 'bg-blue' : 'bg-gray-400'}`}>
+            {(user.name || user.username).slice(0, 2).toUpperCase()}
+          </div>
+          <div class="min-w-0">
+            <p class="font-semibold text-grafite truncate">{user.name || user.username}</p>
+            <p class="text-xs text-gray-500">{user.post_count} respostas · {user.like_count} likes</p>
+          </div>
+          {i < 3 && <span class="ml-auto text-amber font-black text-lg">{['🥇','🥈','🥉'][i]}</span>}
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

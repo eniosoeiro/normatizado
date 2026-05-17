@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+---
+<BaseLayout title="Sobre" description="Normatizado — o fórum técnico colaborativo das normas de engenharia no Brasil." canonical="/sobre">
+  <Nav />
+  <main class="max-w-2xl mx-auto px-8 py-16">
+    <h1 class="text-3xl font-black text-grafite mb-6">Sobre o Normatizado</h1>
+    <p class="text-base text-gray-700 leading-relaxed mb-4">
+      Normatizado é o fórum técnico colaborativo dedicado à interpretação, discussão e aplicação de normas
+      regulamentadoras, normas ABNT e códigos internacionais de engenharia no Brasil.
+    </p>
+    <p class="text-base text-gray-700 leading-relaxed mb-4">
+      Criado por engenheiros, para engenheiros. Nossa missão é democratizar o conhecimento normativo e construir
+      o maior repositório colaborativo de interpretação técnica do país.
+    </p>
+    <p class="text-sm text-gray-500">
+      Iniciativa de <a href="https://esengenharia.com" class="text-blue hover:underline" target="_blank">ES Engenharia</a>.
+    </p>
+  </main>
+</BaseLayout>

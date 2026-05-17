@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" width="200" height="40">
+  <rect width="200" height="40" fill="#1E40AF" rx="4"/>
+  <text x="12" y="27" font-family="Inter,system-ui,sans-serif" font-weight="800"
+        font-size="16" letter-spacing="2" fill="#F59E0B">[ </text>
+  <text x="32" y="27" font-family="Inter,system-ui,sans-serif" font-weight="800"
+        font-size="16" letter-spacing="2" fill="white">NORMATIZADO</text>
+  <text x="175" y="27" font-family="Inter,system-ui,sans-serif" font-weight="800"
+        font-size="16" fill="#F59E0B"> ]</text>
+</svg>

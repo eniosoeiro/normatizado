@@ -1,0 +1,113 @@
+---
+import type { DiscourseThread, DiscourseUser } from '../lib/discourse';
+interface Props {
+  threads: DiscourseThread[];
+  topUsers: DiscourseUser[];
+}
+const { threads, topUsers } = Astro.props;
+
+const tagColors: Record<string, string> = {
+  'nr-13': 'bg-blue-light text-blue',
+  'nr-12': 'bg-blue-light text-blue',
+  'nr-10': 'bg-blue-light text-blue',
+  'iso-13849': 'bg-blue-light text-blue',
+  'asme-viii': 'bg-blue-light text-blue',
+};
+---
+<section class="px-8 pb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-7">
+
+    <!-- Feed -->
+    <div>
+      <div class="flex justify-between items-center mb-5">
+        <h2 class="text-xl font-bold text-grafite">Tópicos em Destaque</h2>
+        <div class="flex gap-1">
+          <a href="/forum/top?period=weekly" class="px-3 py-1.5 text-xs font-semibold rounded bg-blue text-white">VOTADOS</a>
+          <a href="/forum/latest" class="px-3 py-1.5 text-xs font-semibold rounded bg-gray-100 text-gray-500 hover:bg-gray-200">RECENTES</a>
+        </div>
+      </div>
+
+      {threads.length === 0 && (
+        <div class="bg-white border border-border rounded-lg p-8 text-center text-gray-400 text-sm">
+          Fórum em breve. Seja um dos primeiros membros!
+          <br/><a href="/forum/signup" class="text-blue font-semibold mt-2 inline-block">Criar conta →</a>
+        </div>
+      )}
+
+      {threads.map(thread => (
+        <a href={`/forum/t/${thread.slug}/${thread.id}`}
+           class="block bg-white border border-border rounded-lg p-4 mb-3 grid grid-cols-[52px_1fr] gap-4 hover:border-blue hover:shadow-sm transition-all">
+          <div class="flex flex-col items-center gap-1">
+            <span class="text-xl font-black text-blue">{thread.like_count}</span>
+            <span class="text-[9px] text-gray-400 tracking-widest uppercase">votos</span>
+            {thread.posts_count > 1 && (
+              <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded">✓ {thread.posts_count - 1}</span>
+            )}
+          </div>
+          <div>
+            <div class="flex gap-1.5 flex-wrap mb-2">
+              {thread.tags.slice(0, 3).map(tag => (
+                <span class={`text-[9px] font-semibold px-2 py-0.5 rounded uppercase tracking-wide ${tagColors[tag] ?? 'bg-gray-100 text-gray-600'}`}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h3 class="text-sm font-semibold text-grafite leading-snug mb-1.5">{thread.title}</h3>
+            {thread.excerpt && <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">{thread.excerpt}</p>}
+          </div>
+        </a>
+      ))}
+
+      <a href="/forum/top" class="block text-center text-blue text-sm font-semibold mt-4 hover:underline">
+        Ver todos os tópicos →
+      </a>
+    </div>
+
+    <!-- Sidebar -->
+    <div>
+      <!-- Top Contributors -->
+      <div class="bg-white border border-border rounded-lg p-5 mb-4">
+        <h3 class="text-xs font-bold text-grafite tracking-widest uppercase mb-4">Principais Colaboradores</h3>
+        {topUsers.length === 0 && (
+          <p class="text-xs text-gray-400">Seja o primeiro a contribuir!</p>
+        )}
+        {topUsers.map((user, i) => (
+          <a href={`/forum/u/${user.username}`} class="flex items-center gap-3 mb-3 group">
+            <div class={`w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0
+              ${i === 0 ? 'bg-blue' : i === 1 ? 'bg-green-700' : 'bg-purple-600'}`}>
+              {(user.name || user.username).slice(0, 2).toUpperCase()}
+            </div>
+            <div class="min-w-0">
+              <p class="text-sm font-semibold text-grafite group-hover:text-blue truncate">{user.name || user.username}</p>
+              <p class="text-xs text-gray-400">{user.post_count} respostas</p>
+            </div>
+            <span class="text-blue text-xs font-bold ml-auto">+{user.like_count}</span>
+          </a>
+        ))}
+      </div>
+
+      <!-- Norma da Semana -->
+      <div class="bg-blue rounded-lg p-5 mb-4">
+        <p class="text-amber text-xs font-bold tracking-widest uppercase mb-2">Norma da Semana</p>
+        <p class="text-white/85 text-sm leading-relaxed">
+          Discussão aberta: o que muda no PGR para 2026 com a nova revisão da NR-1?
+        </p>
+        <a href="/forum/c/sst-maquinas" class="block bg-amber text-grafite text-center text-xs font-bold py-2 rounded mt-4 hover:bg-yellow-400 transition-colors">
+          PARTICIPAR
+        </a>
+      </div>
+
+      <!-- Tags populares -->
+      <div class="bg-white border border-border rounded-lg p-5">
+        <h3 class="text-xs font-bold text-grafite tracking-widest uppercase mb-4">Tags Populares</h3>
+        <div class="flex flex-wrap gap-2">
+          {['nr-12','nr-13','abnt-nbr-5410','asme-viii','laudo-tecnico','nr-35','iso-13849'].map(tag => (
+            <a href={`/forum/tag/${tag}`} class="bg-blue-light text-blue text-xs font-semibold px-3 py-1.5 rounded-full hover:bg-blue hover:text-white transition-colors">
+              #{tag}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

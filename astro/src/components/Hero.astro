@@ -1,0 +1,34 @@
+---
+---
+<section class="bg-grafite py-12 px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+  <div>
+    <p class="text-amber font-mono text-xs tracking-[3px] uppercase mb-4">// Repositório Técnico Colaborativo</p>
+    <h1 class="text-white font-black text-4xl md:text-5xl leading-tight mb-5">
+      A autoridade técnica para a Engenharia <span class="text-amber">Nacional.</span>
+    </h1>
+    <p class="text-white/65 text-base leading-relaxed mb-8 max-w-lg">
+      O fórum definitivo para interpretação de NRs, normas ABNT e códigos internacionais.
+      Segurança jurídica e precisão técnica para quem assina a ART.
+    </p>
+    <div class="flex gap-3 flex-wrap">
+      <a href="/forum/signup" class="bg-amber text-grafite font-bold px-6 py-3 rounded text-sm tracking-wide hover:bg-yellow-400 transition-colors">
+        COMEÇAR A DISCUTIR
+      </a>
+      <a href="/normas" class="border-2 border-white/30 text-white font-semibold px-6 py-3 rounded text-sm hover:border-white/60 transition-colors">
+        EXPLORAR NORMAS
+      </a>
+    </div>
+  </div>
+  <div class="hidden md:block bg-white/5 border border-white/10 rounded-lg p-5 relative">
+    <span class="absolute -top-3 left-3 bg-amber text-grafite text-xs font-bold px-2 py-1 rounded tracking-wider">PROJ_003</span>
+    <div class="h-44 bg-white/5 border border-dashed border-white/15 rounded flex items-center justify-center text-white/30 text-sm">
+      [ Desenhos técnicos em destaque — NBR 6118 / ASME VIII ]
+    </div>
+    <div class="flex justify-center gap-2 mt-4">
+      {[0,1,2,3,4].map((i) => (
+        <div class={`h-1 rounded-sm ${i === 1 ? 'w-6 bg-amber' : 'w-4 bg-white/20'}`}></div>
+      ))}
+    </div>
+    <p class="text-right text-white/30 text-xs mt-2 tracking-wider">NBR 6118 &nbsp; 03 / 05</p>
+  </div>
+</section>

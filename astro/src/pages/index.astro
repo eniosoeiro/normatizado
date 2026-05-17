@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import CategoryGrid from '../components/CategoryGrid.astro';
+import ThreadFeed from '../components/ThreadFeed.astro';
+import StatsBar from '../components/StatsBar.astro';
+import { getTopThreads, getSiteStats, getTopUsers } from '../lib/discourse';
+
+const [threads, stats, topUsers] = await Promise.all([
+  getTopThreads('weekly', 5),
+  getSiteStats(),
+  getTopUsers(3),
+]);
+---
+<BaseLayout
+  title="O fórum técnico das normas brasileiras e internacionais"
+  description="Fórum colaborativo para engenheiros e técnicos: NR-12, NR-13, ASME VIII, ABNT, IEC e muito mais. Tire dúvidas, compartilhe conhecimento, construa reputação."
+  canonical="/"
+>
+  <Nav />
+  <Hero />
+  <CategoryGrid />
+  <div class="h-px bg-border mx-8"></div>
+  <ThreadFeed threads={threads} topUsers={topUsers} />
+  <StatsBar stats={stats} />
+</BaseLayout>

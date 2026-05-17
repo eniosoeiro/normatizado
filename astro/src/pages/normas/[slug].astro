@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import { normas } from '../../data/normas';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () =>
+  normas.map(n => ({ params: { slug: n.slug }, props: { norma: n } }));
+
+const { norma } = Astro.props;
+---
+<BaseLayout
+  title={`${norma.sigla} — ${norma.nome}`}
+  description={norma.descricao}
+  canonical={`/normas/${norma.slug}`}
+>
+  <Nav />
+  <main class="max-w-3xl mx-auto px-8 py-12">
+    <nav class="text-xs text-gray-400 mb-6">
+      <a href="/" class="hover:text-blue">Início</a> /
+      <a href="/normas" class="hover:text-blue"> Normas</a> /
+      <span class="text-grafite font-semibold"> {norma.sigla}</span>
+    </nav>
+
+    <div class="flex items-start gap-5 mb-8">
+      <div class="bg-blue text-white font-black text-lg px-5 py-3 rounded flex-shrink-0">
+        {norma.sigla}
+      </div>
+      <div>
+        <h1 class="text-2xl font-black text-grafite leading-tight">{norma.nome}</h1>
+        <p class="text-sm text-gray-500 mt-1">{norma.orgao}</p>
+      </div>
+    </div>
+
+    <p class="text-base text-gray-700 leading-relaxed mb-8">{norma.descricao}</p>
+
+    <h2 class="text-lg font-bold text-grafite mb-4">Escopo de aplicação</h2>
+    <ul class="space-y-2 mb-10">
+      {norma.scope.map(item => (
+        <li class="flex gap-3 items-start">
+          <span class="text-amber mt-0.5">&#9658;</span>
+          <span class="text-sm text-gray-700">{item}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="bg-blue-light border border-blue/20 rounded-lg p-6">
+      <h3 class="font-bold text-blue mb-2">Discussões sobre {norma.sigla}</h3>
+      <p class="text-sm text-gray-600 mb-4">
+        Veja perguntas, interpretações e casos práticos discutidos por engenheiros no fórum.
+      </p>
+      <a href={`/forum/tag/${norma.discourseTag}`}
+         class="inline-block bg-blue text-white font-semibold text-sm px-5 py-2 rounded hover:bg-blue-dark transition-colors">
+        Ver threads sobre {norma.sigla} →
+      </a>
+    </div>
+  </main>
+</BaseLayout>

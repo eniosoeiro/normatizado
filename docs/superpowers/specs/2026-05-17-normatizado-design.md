@@ -62,9 +62,9 @@ export async function onRequest(context: EventContext<any, any, any>) {
 ```yaml
 DISCOURSE_HOSTNAME: normatizado.com.br
 DISCOURSE_RELATIVE_URL_ROOT: /forum
-DISCOURSE_SMTP_ADDRESS: smtp.postmarkapp.com
+DISCOURSE_SMTP_ADDRESS: email-smtp.us-east-1.amazonaws.com
 DISCOURSE_SMTP_PORT: 587
-DISCOURSE_SMTP_USER_NAME: postmark_api_token
+DISCOURSE_SMTP_USER_NAME: SES_SMTP_ACCESS_KEY_ID  # IAM user com permissão ses:SendRawEmail
 DISCOURSE_CDN_URL: https://normatizado.com.br
 ```
 
@@ -217,9 +217,9 @@ Preparado para SSO reverso (Discourse como provider para outros SaaS) na Fase 2.
 | CF Pages Function /forum proxy | Cloudflare Pages (incluído) | R$ 0 |
 | Discourse + Postgres + Redis | VPS Hostinger (existente) | R$ 0 adicional |
 | Domínio normatizado.com.br | Registro.br | ~R$ 8/mês |
-| Email transacional | Postmark (até 10k/mês) | ~R$ 50/mês |
+| Email transacional | Amazon SES | ~R$ 3/mês (10k emails) |
 | Backup | Backblaze B2 (existente) | ~R$ 10/mês |
-| **Total adicional** | | **~R$ 68/mês** |
+| **Total adicional** | | **~R$ 21/mês** |
 
 ---
 

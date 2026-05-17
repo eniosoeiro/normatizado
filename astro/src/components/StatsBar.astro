@@ -1,0 +1,20 @@
+---
+import type { DiscourseSiteStats } from '../lib/discourse';
+interface Props { stats: DiscourseSiteStats; }
+const { stats } = Astro.props;
+
+const items = [
+  { num: stats.user_count > 0 ? stats.user_count.toLocaleString('pt-BR') : '—', label: 'Engenheiros' },
+  { num: stats.topic_count > 0 ? stats.topic_count.toLocaleString('pt-BR') : '—', label: 'Discussões' },
+  { num: stats.post_count > 0 ? stats.post_count.toLocaleString('pt-BR') : '—', label: 'Respostas' },
+  { num: '82%', label: 'Taxa de Solução' },
+];
+---
+<div class="bg-grafite grid grid-cols-4 py-7">
+  {items.map(item => (
+    <div class="text-center">
+      <div class="text-amber font-black text-3xl">{item.num}</div>
+      <div class="text-white/50 text-xs tracking-widest uppercase mt-1">{item.label}</div>
+    </div>
+  ))}
+</div>

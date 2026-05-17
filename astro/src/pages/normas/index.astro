@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import { normas } from '../../data/normas';
+
+const byCategoria = {
+  mecanica:       normas.filter(n => n.categoria === 'mecanica'),
+  eletrica:       normas.filter(n => n.categoria === 'eletrica'),
+  civil:          normas.filter(n => n.categoria === 'civil'),
+  sst:            normas.filter(n => n.categoria === 'sst'),
+  instrumentacao: normas.filter(n => n.categoria === 'instrumentacao'),
+};
+
+const categoriaLabels: Record<string, string> = {
+  mecanica: 'Mecanica e Pressao',
+  eletrica: 'Eletrica e ATEX',
+  civil: 'Civil e Estrutural',
+  sst: 'SST e Seg. Maquinas',
+  instrumentacao: 'Instrumentacao',
+};
+---
+<BaseLayout
+  title="Normas Técnicas"
+  description="Guia completo de normas técnicas brasileiras e internacionais: NRs, ABNT NBR, ASME, API, ISO, IEC. Discussões e interpretações no fórum Normatizado."
+  canonical="/normas"
+>
+  <Nav />
+  <main class="max-w-5xl mx-auto px-8 py-12">
+    <h1 class="text-3xl font-black text-grafite mb-2">Normas Técnicas</h1>
+    <p class="text-gray-500 mb-10">Base de conhecimento colaborativo por norma — discussões, interpretações e casos práticos.</p>
+
+    {Object.entries(byCategoria).map(([cat, list]) => (
+      <section class="mb-10">
+        <h2 class="text-lg font-bold text-grafite mb-4 pb-2 border-b border-border">
+          {categoriaLabels[cat]}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {list.map(norma => (
+            <a href={`/normas/${norma.slug}`}
+               class="flex gap-4 bg-white border border-border rounded-lg p-4 hover:border-blue hover:shadow-sm transition-all">
+              <div class="bg-blue-light text-blue font-black text-xs px-3 py-2 rounded flex-shrink-0 self-start tracking-wide">
+                {norma.sigla}
+              </div>
+              <div>
+                <h3 class="text-sm font-semibold text-grafite mb-1">{norma.nome}</h3>
+                <p class="text-xs text-gray-500 leading-snug line-clamp-2">{norma.descricao}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </main>
+</BaseLayout>

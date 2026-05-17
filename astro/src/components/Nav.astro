@@ -1,0 +1,24 @@
+---
+const links = [
+  { href: '/normas', label: 'Normas' },
+  { href: '/forum/latest', label: 'Discussões' },
+  { href: '/especialistas', label: 'Especialistas' },
+  { href: '/forum/tags', label: 'Tags' },
+];
+---
+<nav class="bg-blue h-14 flex items-center justify-between px-8">
+  <a href="/" class="font-mono font-black text-base tracking-widest text-white border-2 border-white/40 px-3 py-1 rounded">
+    <span class="text-amber">[</span> NORMATIZADO <span class="text-amber">]</span>
+  </a>
+  <div class="hidden md:flex gap-7">
+    {links.map(l => (
+      <a href={l.href} class="text-white/80 hover:text-white text-sm font-medium transition-colors">{l.label}</a>
+    ))}
+  </div>
+  <div class="flex items-center gap-3">
+    <a href="/forum/search" class="text-white/60 text-sm hidden md:block">🔍 Buscar normas...</a>
+    <a href="/forum/login" class="bg-amber text-grafite font-bold text-sm px-4 py-2 rounded hover:bg-amber-400 transition-colors">
+      ENTRAR
+    </a>
+  </div>
+</nav>

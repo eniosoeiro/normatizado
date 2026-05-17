@@ -1,0 +1,31 @@
+---
+const categories = [
+  { num: '01', code: 'MEC', name: 'Mecânica e Pressão', desc: 'NR-13, ASME VIII, Tubulações e Caldeiras.', href: '/forum/c/mecanica-pressao' },
+  { num: '02', code: 'ELE', name: 'Elétrica e ATEX',   desc: 'NR-10, NBR 5410, Atmosferas Explosivas.',  href: '/forum/c/eletrica-atex' },
+  { num: '03', code: 'SST', name: 'SST e Seg. Máquinas', desc: 'NR-12, NR-35, PGR, Gestão de Riscos.',  href: '/forum/c/sst-maquinas', highlight: true },
+  { num: '04', code: 'CIV', name: 'Civil e Estrutural', desc: 'NBR 6118, NBR 8800, NR-18, Fundações.',   href: '/forum/c/civil-estrutural' },
+  { num: '05', code: 'INST', name: 'Instrumentação',   desc: 'ISA-84, SIL, IEC 61511, Automação.',       href: '/forum/c/instrumentacao' },
+];
+---
+<section class="px-8 py-9">
+  <div class="flex justify-between items-end mb-5">
+    <div>
+      <h2 class="text-xl font-bold text-grafite">Disciplinas Normativas</h2>
+      <p class="text-sm text-gray-500 mt-1">Navegue por áreas específicas de atuação técnica.</p>
+    </div>
+    <span class="text-amber text-sm font-semibold">01/05 ›</span>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+    {categories.map(cat => (
+      <a href={cat.href}
+         class={`block border rounded-md p-4 transition-all hover:shadow-md
+           ${cat.highlight
+             ? 'border-t-4 border-t-amber bg-amber-light border-x-border border-b-border'
+             : 'border-t-4 border-t-border bg-white hover:border-t-blue'}`}>
+        <p class="text-gray-400 text-xs tracking-widest font-semibold mb-2">{cat.num}. {cat.code}</p>
+        <h3 class="text-sm font-bold text-grafite mb-1">{cat.name}</h3>
+        <p class="text-xs text-gray-500 leading-snug">{cat.desc}</p>
+      </a>
+    ))}
+  </div>
+</section>
