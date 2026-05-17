@@ -7,7 +7,7 @@ templates:
   - "templates/web.ratelimited.template.yml"
 
 expose:
-  - "127.0.0.1:9001:80"   # porta 9001 — Traefik do Coolify proxy para aqui
+  - "9001:80"   # 0.0.0.0:9001 — Traefik (coolify-proxy) acessa via host.docker.internal:9001
 
 params:
   db_default_text_search_config: "pg_catalog.portuguese"
