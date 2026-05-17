@@ -36,24 +36,22 @@ env:
 
   DISCOURSE_CDN_URL: "https://normatizado.com.br"
 
-  # Backblaze B2 backup (S3-compatible)
-  DISCOURSE_S3_BACKUP_BUCKET: "normatizado-backups"
-  DISCOURSE_S3_REGION: "us-west-004"               # ajustar para região real do bucket B2
-  DISCOURSE_S3_ACCESS_KEY_ID: "B2_KEY_ID"          # substituir: keyID do B2 App Key
-  DISCOURSE_S3_SECRET_ACCESS_KEY: "B2_APP_KEY"     # substituir: applicationKey do B2
-  DISCOURSE_S3_ENDPOINT: "https://s3.us-west-004.backblazeb2.com"
-  DISCOURSE_BACKUP_LOCATION: "s3"
+  # Backblaze B2 backup (S3-compatible) — ativar após criar bucket e App Key
+  #DISCOURSE_S3_BACKUP_BUCKET: "normatizado-backups"
+  #DISCOURSE_S3_REGION: "us-west-004"
+  #DISCOURSE_S3_ACCESS_KEY_ID: "B2_KEY_ID"
+  #DISCOURSE_S3_SECRET_ACCESS_KEY: "B2_APP_KEY"
+  #DISCOURSE_S3_ENDPOINT: "https://s3.us-west-004.backblazeb2.com"
+  #DISCOURSE_BACKUP_LOCATION: "s3"
 
 hooks:
   after_code:
     - exec:
         cd: $home/plugins
         cmd:
-          - git clone https://github.com/discourse/discourse-solved.git
-          - git clone https://github.com/discourse/discourse-math.git
+          # discourse-solved, discourse-math, discourse-data-explorer, discourse-checklist
+          # estão BUNDLED no Discourse — não incluir aqui
           - git clone https://github.com/discourse/discourse-akismet.git
-          - git clone https://github.com/discourse/discourse-data-explorer.git
-          - git clone https://github.com/discourse/discourse-checklist.git
 
 volumes:
   - volume:
