@@ -1,34 +1,116 @@
 ---
 ---
-<section class="bg-grafite py-12 px-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-  <div>
-    <p class="text-amber font-mono text-xs tracking-[3px] uppercase mb-4">// Repositório Técnico Colaborativo</p>
-    <h1 class="text-white font-black text-4xl md:text-5xl leading-tight mb-5">
-      A autoridade técnica para a Engenharia <span class="text-amber">Nacional.</span>
-    </h1>
-    <p class="text-white/65 text-base leading-relaxed mb-8 max-w-lg">
-      O fórum definitivo para interpretação de NRs, normas ABNT e códigos internacionais.
-      Segurança jurídica e precisão técnica para quem assina a ART.
-    </p>
-    <div class="flex gap-3 flex-wrap">
-      <a href="/forum/signup" class="bg-amber text-grafite font-bold px-6 py-3 rounded text-sm tracking-wide hover:bg-yellow-400 transition-colors">
-        COMEÇAR A DISCUTIR
-      </a>
-      <a href="/normas" class="border-2 border-white/30 text-white font-semibold px-6 py-3 rounded text-sm hover:border-white/60 transition-colors">
-        EXPLORAR NORMAS
-      </a>
+<section class="bg-grafite relative overflow-hidden">
+  <!-- subtle grid texture -->
+  <div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+  <div class="relative px-8 pt-14 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 items-center max-w-6xl mx-auto">
+
+    <!-- Left -->
+    <div>
+      <div class="flex flex-wrap gap-2 mb-6">
+        {['NR-12','NR-13','NR-10','ASME VIII','ABNT NBR 5410','ISO 13849'].map(tag => (
+          <span class="font-mono text-[10px] tracking-widest border border-white/20 text-white/50 px-2.5 py-1 rounded-sm">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-white font-black text-4xl md:text-5xl leading-[1.1] mb-5">
+        Chega de interpretar<br/>
+        <span class="text-amber">NR no escuro.</span>
+      </h1>
+      <p class="text-white/60 text-base leading-relaxed mb-8 max-w-lg">
+        Fórum técnico para engenheiros e inspetores. Dúvidas reais sobre NR-12, NR-13, ASME, ABNT e códigos internacionais — respondidas por quem já passou por auditoria.
+      </p>
+      <div class="flex gap-3 flex-wrap items-center">
+        <a href="/forum/signup" class="bg-amber text-grafite font-bold px-6 py-3 rounded text-sm tracking-wide hover:bg-yellow-400 transition-colors inline-flex items-center gap-2">
+          CRIAR CONTA GRÁTIS
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        </a>
+        <a href="/forum/latest" class="text-white/70 font-semibold text-sm hover:text-white transition-colors">
+          Ver discussões →
+        </a>
+      </div>
+      <p class="mt-5 text-white/30 text-xs">Gratuito. Sem spam. Para quem assina ART.</p>
     </div>
-  </div>
-  <div class="hidden md:block bg-white/5 border border-white/10 rounded-lg p-5 relative">
-    <span class="absolute -top-3 left-3 bg-amber text-grafite text-xs font-bold px-2 py-1 rounded tracking-wider">PROJ_003</span>
-    <div class="h-44 bg-white/5 border border-dashed border-white/15 rounded flex items-center justify-center text-white/30 text-sm">
-      [ Desenhos técnicos em destaque — NBR 6118 / ASME VIII ]
+
+    <!-- Right: mock discussion card -->
+    <div class="hidden lg:block">
+      <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden shadow-2xl">
+        <!-- forum thread header -->
+        <div class="px-4 pt-4 pb-3 border-b border-white/10">
+          <div class="flex gap-2 mb-2">
+            <span class="text-[9px] font-bold bg-blue/30 text-blue-300 px-2 py-0.5 rounded uppercase tracking-wide border border-blue/20">nr-13</span>
+            <span class="text-[9px] font-bold bg-white/10 text-white/40 px-2 py-0.5 rounded uppercase tracking-wide">vasos-pressão</span>
+          </div>
+          <h3 class="text-white font-semibold text-sm leading-snug">Categoria II ou III para vaso de expansão com P=0,8 MPa e volume 80L?</h3>
+          <div class="flex items-center gap-3 mt-2 text-white/30 text-xs">
+            <span>eng.silva</span>
+            <span>·</span>
+            <span>3 respostas</span>
+            <span>·</span>
+            <span class="text-green-400 font-semibold">✓ Resolvido</span>
+          </div>
+        </div>
+        <!-- accepted answer -->
+        <div class="px-4 py-3 bg-green-900/10 border-b border-white/5">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-6 h-6 rounded-full bg-amber flex items-center justify-center text-grafite text-[10px] font-black">IP</div>
+            <span class="text-white/60 text-xs font-semibold">insp.paulo</span>
+            <span class="text-[9px] bg-green-700/40 text-green-400 px-1.5 py-0.5 rounded border border-green-700/30">Resp. aceita</span>
+          </div>
+          <p class="text-white/55 text-xs leading-relaxed">
+            Pela tabela 1 do Anexo I, com P×V = 64 L·MPa, enquadra-se na <strong class="text-white/80">Categoria II</strong>. O critério é P×V ≥ 200 para Cat. III. Precisa de PMIE mas não exige Profissional Habilitado externo.
+          </p>
+        </div>
+        <!-- footer stats -->
+        <div class="px-4 py-2.5 flex items-center justify-between">
+          <div class="flex gap-4 text-white/25 text-[11px]">
+            <span>🔥 42 visualizações</span>
+            <span>❤️ 17 curtidas</span>
+          </div>
+          <a href="/forum" class="text-amber text-[11px] font-semibold hover:underline">Ver fórum →</a>
+        </div>
+      </div>
+
+      <!-- second mini card -->
+      <div class="mt-3 bg-white/5 border border-white/8 rounded-lg px-4 py-3 flex items-start gap-3">
+        <div class="w-7 h-7 rounded-full bg-blue/30 border border-blue/20 flex items-center justify-center text-white/50 text-[10px] font-black flex-shrink-0">MR</div>
+        <div class="min-w-0">
+          <div class="flex gap-2 mb-1">
+            <span class="text-[9px] font-bold bg-white/10 text-white/40 px-2 py-0.5 rounded uppercase tracking-wide">nr-12</span>
+            <span class="text-[9px] font-bold bg-white/10 text-white/40 px-2 py-0.5 rounded uppercase tracking-wide">iso-13849</span>
+          </div>
+          <p class="text-white/50 text-xs leading-snug truncate">PLr para prensa hidráulica com comando bimanual tipo IIIC...</p>
+          <span class="text-white/25 text-[10px]">6 respostas</span>
+        </div>
+      </div>
     </div>
-    <div class="flex justify-center gap-2 mt-4">
-      {[0,1,2,3,4].map((i) => (
-        <div class={`h-1 rounded-sm ${i === 1 ? 'w-6 bg-amber' : 'w-4 bg-white/20'}`}></div>
-      ))}
-    </div>
-    <p class="text-right text-white/30 text-xs mt-2 tracking-wider">NBR 6118 &nbsp; 03 / 05</p>
+
   </div>
 </section>
+
+<!-- value props strip -->
+<div class="bg-blue py-10 px-8">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="flex gap-4 items-start">
+      <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-xl flex-shrink-0">⚖️</div>
+      <div>
+        <h3 class="text-white font-bold text-sm mb-1">Resposta com embasamento</h3>
+        <p class="text-white/55 text-xs leading-relaxed">Cada resposta cita o item exato da norma. Nada de "depende" sem fundamento.</p>
+      </div>
+    </div>
+    <div class="flex gap-4 items-start">
+      <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-xl flex-shrink-0">🏗️</div>
+      <div>
+        <h3 class="text-white font-bold text-sm mb-1">Quem responde, fez ART</h3>
+        <p class="text-white/55 text-xs leading-relaxed">Comunidade de engenheiros e inspetores com experiência em campo e auditoria.</p>
+      </div>
+    </div>
+    <div class="flex gap-4 items-start">
+      <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-xl flex-shrink-0">📚</div>
+      <div>
+        <h3 class="text-white font-bold text-sm mb-1">Histórico técnico permanente</h3>
+        <p class="text-white/55 text-xs leading-relaxed">Cada discussão vira referência. Pesquise antes de perguntar — a resposta pode já existir.</p>
+      </div>
+    </div>
+  </div>
+</div>
