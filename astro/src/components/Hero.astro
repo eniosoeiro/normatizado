@@ -1,41 +1,41 @@
 ---
 ---
-<section class="bg-grafite relative overflow-hidden">
-  <!-- diagonal gradient: grafite → deep blue, top-right bloom -->
-  <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 75% -10%, rgba(30,64,115,0.55) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 100% 100%, rgba(14,36,72,0.35) 0%, transparent 60%);"></div>
+<section class="relative overflow-hidden" style="background-color: #1a1f2e;">
+  <!-- banner photo -->
+  <picture>
+    <source srcset="/banner_forum.webp" type="image/webp" />
+    <img src="/banner_forum.jpg" alt="" aria-hidden="true"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      style="opacity: 0.28;" fetchpriority="high" />
+  </picture>
 
-  <!-- blueprint SVG pattern: dimension lines, cross marks, corner brackets -->
-  <div class="absolute inset-0 opacity-[0.045]" aria-hidden="true">
+  <!-- dark overlay: keeps text readable, adds blue tint -->
+  <div class="absolute inset-0" style="background: linear-gradient(105deg, rgba(14,20,38,0.82) 0%, rgba(14,20,38,0.65) 50%, rgba(14,28,60,0.70) 100%);"></div>
+
+  <!-- blueprint SVG pattern on top -->
+  <div class="absolute inset-0 opacity-[0.04]" aria-hidden="true">
     <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="bp" x="0" y="0" width="160" height="160" patternUnits="userSpaceOnUse">
-          <!-- outer frame corner brackets -->
           <path d="M8,2 L2,2 L2,8" fill="none" stroke="#fff" stroke-width="0.8"/>
           <path d="M152,2 L158,2 L158,8" fill="none" stroke="#fff" stroke-width="0.8"/>
           <path d="M8,158 L2,158 L2,152" fill="none" stroke="#fff" stroke-width="0.8"/>
           <path d="M152,158 L158,158 L158,152" fill="none" stroke="#fff" stroke-width="0.8"/>
-          <!-- center crosshair -->
           <line x1="80" y1="72" x2="80" y2="88" stroke="#fff" stroke-width="0.6"/>
           <line x1="72" y1="80" x2="88" y2="80" stroke="#fff" stroke-width="0.6"/>
           <circle cx="80" cy="80" r="4" fill="none" stroke="#fff" stroke-width="0.6"/>
-          <!-- horizontal dimension line -->
           <line x1="20" y1="130" x2="140" y2="130" stroke="#fff" stroke-width="0.5"/>
           <line x1="20" y1="126" x2="20" y2="134" stroke="#fff" stroke-width="0.5"/>
           <line x1="140" y1="126" x2="140" y2="134" stroke="#fff" stroke-width="0.5"/>
-          <!-- vertical dimension line -->
           <line x1="130" y1="20" x2="130" y2="120" stroke="#fff" stroke-width="0.5"/>
           <line x1="126" y1="20" x2="134" y2="20" stroke="#fff" stroke-width="0.5"/>
           <line x1="126" y1="120" x2="134" y2="120" stroke="#fff" stroke-width="0.5"/>
-          <!-- small tolerance bracket -->
           <rect x="56" y="56" width="48" height="48" fill="none" stroke="#fff" stroke-width="0.4" stroke-dasharray="3 3"/>
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#bp)"/>
     </svg>
   </div>
-
-  <!-- subtle grid texture (keep on top of blueprint) -->
-  <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
 
   <div class="relative px-8 pt-14 pb-16 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 items-center max-w-6xl mx-auto">
 
