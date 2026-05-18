@@ -1,2 +1,5 @@
 .superpowers/
 .openclaw-secrets
+ruvector.db
+.claude/
+.claude-flow/
