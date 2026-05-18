@@ -21,11 +21,23 @@ export async function onRequest(
   }
 
   const targetUrl = new URL(url.pathname + url.search, origin);
+  const host = new URL(request.url).hostname;
 
   const headers = new Headers(request.headers);
   headers.set('X-Forwarded-For', request.headers.get('CF-Connecting-IP') ?? '');
   headers.set('X-Forwarded-Proto', 'https');
-  headers.set('Host', new URL(request.url).hostname);
+  headers.set('Host', host);
+
+  if (url.pathname === '/forum/_debug2') {
+    const resp = await fetch(new Request(targetUrl.toString(), { method: 'GET', headers, redirect: 'manual' }));
+    return new Response(JSON.stringify({
+      targetUrl: targetUrl.toString(),
+      host,
+      vpsStatus: resp.status,
+      vpsContentType: resp.headers.get('content-type'),
+      vpsLocation: resp.headers.get('location'),
+    }), { headers: { 'content-type': 'application/json' } });
+  }
 
   const proxied = new Request(targetUrl.toString(), {
     method: request.method,
