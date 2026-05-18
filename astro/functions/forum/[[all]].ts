@@ -18,7 +18,7 @@ export async function onRequest(
   const headers = new Headers(request.headers);
   headers.set('X-Forwarded-For', request.headers.get('CF-Connecting-IP') ?? '');
   headers.set('X-Forwarded-Proto', 'https');
-  headers.delete('Host');
+  headers.set('Host', new URL(request.url).hostname);
 
   const proxied = new Request(targetUrl.toString(), {
     method: request.method,
@@ -29,4 +29,3 @@ export async function onRequest(
 
   return fetch(proxied);
 }
-# VPS_DISCOURSE_ORIGIN=http://76.13.83.27 (port 80)
