@@ -8,11 +8,18 @@ export async function onRequest(
   const { request, env } = context;
   const origin = env.VPS_DISCOURSE_ORIGIN;
 
+  const url = new URL(request.url);
+
+  if (url.pathname === '/forum/_debug') {
+    return new Response(JSON.stringify({ origin: origin ?? null, path: url.pathname }), {
+      headers: { 'content-type': 'application/json' },
+    });
+  }
+
   if (!origin) {
     return new Response('VPS_DISCOURSE_ORIGIN not configured', { status: 503 });
   }
 
-  const url = new URL(request.url);
   const targetUrl = new URL(url.pathname + url.search, origin);
 
   const headers = new Headers(request.headers);
