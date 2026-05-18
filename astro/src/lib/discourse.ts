@@ -1,4 +1,4 @@
-const DISCOURSE_BASE = 'https://normatizado.com.br/forum';
+const DISCOURSE_BASE = 'https://normatizando.com.br/forum';
 
 export interface DiscourseThread {
   id: number;

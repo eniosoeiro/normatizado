@@ -20,7 +20,7 @@ env:
   LANGUAGE: en_US.UTF-8
   DISCOURSE_DEFAULT_LOCALE: pt_BR
 
-  DISCOURSE_HOSTNAME: normatizado.com.br
+  DISCOURSE_HOSTNAME: normatizando.com.br
   DISCOURSE_RELATIVE_URL_ROOT: /forum
 
   DISCOURSE_DEVELOPER_EMAILS: "eniosoeiro@gmail.com"
@@ -31,10 +31,10 @@ env:
   DISCOURSE_SMTP_USER_NAME: "SES_SMTP_KEY_ID"      # substituir: Access Key ID do IAM user
   DISCOURSE_SMTP_PASSWORD: "SES_SMTP_SECRET"        # substituir: SMTP password derivada (script Python)
   DISCOURSE_SMTP_ENABLE_START_TLS: true
-  DISCOURSE_SMTP_DOMAIN: "normatizado.com.br"
-  DISCOURSE_NOTIFICATION_EMAIL: "noreply@normatizado.com.br"
+  DISCOURSE_SMTP_DOMAIN: "normatizando.com.br"
+  DISCOURSE_NOTIFICATION_EMAIL: "noreply@normatizando.com.br"
 
-  DISCOURSE_CDN_URL: "https://normatizado.com.br"
+  DISCOURSE_CDN_URL: "https://normatizando.com.br"
 
   # Backblaze B2 backup (S3-compatible) — ativar após criar bucket e App Key
   #DISCOURSE_S3_BACKUP_BUCKET: "normatizado-backups"

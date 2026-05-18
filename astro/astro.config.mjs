@@ -10,5 +10,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   trailingSlash: 'never',
-  site: 'https://normatizado.com.br',
+  site: 'https://normatizando.com.br',
 });
