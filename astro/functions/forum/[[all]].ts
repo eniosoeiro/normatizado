@@ -29,3 +29,4 @@ export async function onRequest(
 
   return fetch(proxied);
 }
+# VPS_DISCOURSE_ORIGIN=http://76.13.83.27 (port 80)
