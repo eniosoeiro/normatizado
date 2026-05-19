@@ -1,0 +1,94 @@
+---
+const year = new Date().getFullYear();
+
+const columns = [
+  {
+    title: 'Fórum',
+    links: [
+      { label: 'Discussões',    href: '/forum/latest' },
+      { label: 'Em Alta',       href: '/forum/top' },
+      { label: 'Especialistas', href: '/especialistas' },
+      { label: 'Tags',          href: '/forum/tags' },
+      { label: 'Buscar',        href: '/forum/search' },
+    ],
+  },
+  {
+    title: 'Normas',
+    links: [
+      { label: 'NR-12 — Máquinas',      href: '/normas/nr-12' },
+      { label: 'NR-13 — Vasos e Caldeiras', href: '/normas/nr-13' },
+      { label: 'NR-10 — Instalações Elétricas', href: '/normas/nr-10' },
+      { label: 'ASME VIII',             href: '/normas/asme-viii' },
+      { label: 'Todas as Normas',        href: '/normas' },
+    ],
+  },
+  {
+    title: 'Conta',
+    links: [
+      { label: 'Criar Conta Grátis', href: '/cadastro' },
+      { label: 'Entrar',             href: '/forum/login' },
+      { label: 'Meu Perfil',         href: '/forum/my/preferences' },
+      { label: 'Notificações',       href: '/forum/my/notifications' },
+    ],
+  },
+];
+---
+
+<footer class="bg-grafite text-white/70">
+
+  <!-- main grid -->
+  <div class="max-w-6xl mx-auto px-8 py-14 grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10">
+
+    <!-- brand -->
+    <div>
+      <a href="/" class="font-mono font-black text-base tracking-widest text-white inline-block mb-4">
+        <span class="text-amber">[</span> NORMATIZADO <span class="text-amber">]</span>
+      </a>
+      <p class="text-sm leading-relaxed text-white/55 max-w-xs">
+        Fórum técnico para engenheiros e inspetores. Discussões baseadas em normas, respondidas por quem já assinou ART.
+      </p>
+      <div class="flex gap-3 mt-6">
+        <a href="/forum/latest" class="bg-amber text-grafite text-xs font-bold px-4 py-2 rounded hover:bg-yellow-400 transition-colors">
+          ACESSAR FÓRUM →
+        </a>
+      </div>
+      <!-- tags de normas como referência visual -->
+      <div class="flex flex-wrap gap-1.5 mt-6">
+        {['NR-12','NR-13','NR-10','ASME VIII','ISO 13849','ABNT NBR 5410'].map(t => (
+          <span class="font-mono text-[9px] tracking-widest border border-white/15 text-white/30 px-2 py-0.5 rounded-sm">{t}</span>
+        ))}
+      </div>
+    </div>
+
+    <!-- nav columns -->
+    {columns.map(col => (
+      <div>
+        <h4 class="text-white text-xs font-bold tracking-widest uppercase mb-4">{col.title}</h4>
+        <ul class="space-y-2.5">
+          {col.links.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-white/55 hover:text-white transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+  </div>
+
+  <!-- divider -->
+  <div class="border-t border-white/10"></div>
+
+  <!-- bottom bar -->
+  <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35">
+    <p>© {year} Normatizado. Todos os direitos reservados.</p>
+    <div class="flex gap-5">
+      <a href="/privacidade" class="hover:text-white/70 transition-colors">Privacidade</a>
+      <a href="/termos"      class="hover:text-white/70 transition-colors">Termos de Uso</a>
+      <a href="mailto:contato@normatizando.com.br" class="hover:text-white/70 transition-colors">contato@normatizando.com.br</a>
+    </div>
+  </div>
+
+</footer>
