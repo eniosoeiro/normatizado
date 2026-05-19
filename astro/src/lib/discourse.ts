@@ -60,6 +60,21 @@ export async function getSiteStats(): Promise<DiscourseSiteStats> {
   }
 }
 
+export async function getLatestThreads(limit = 5): Promise<DiscourseThread[]> {
+  try {
+    const res = await fetch(`${DISCOURSE_BASE}/latest.json`, {
+      headers: { 'Accept': 'application/json' },
+    });
+    if (!res.ok) return getMockThreads();
+    const data = await res.json();
+    return (data.topic_list?.topics ?? [])
+      .filter((t: DiscourseThread) => t.id !== 3 && !t.title?.startsWith('About the'))
+      .slice(0, limit);
+  } catch {
+    return getMockThreads();
+  }
+}
+
 export async function getTopUsers(limit = 5): Promise<DiscourseUser[]> {
   try {
     const res = await fetch(`${DISCOURSE_BASE}/directory_items.json?period=monthly&order=post_count`, {

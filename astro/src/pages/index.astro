@@ -5,10 +5,11 @@ import Hero from '../components/Hero.astro';
 import CategoryGrid from '../components/CategoryGrid.astro';
 import ThreadFeed from '../components/ThreadFeed.astro';
 import StatsBar from '../components/StatsBar.astro';
-import { getTopThreads, getSiteStats, getTopUsers } from '../lib/discourse';
+import { getTopThreads, getLatestThreads, getSiteStats, getTopUsers } from '../lib/discourse';
 
-const [threads, stats, topUsers] = await Promise.all([
+const [topThreads, latestThreads, stats, topUsers] = await Promise.all([
   getTopThreads('weekly', 5),
+  getLatestThreads(5),
   getSiteStats(),
   getTopUsers(3),
 ]);
@@ -22,6 +23,6 @@ const [threads, stats, topUsers] = await Promise.all([
   <Hero />
   <CategoryGrid />
   <div class="h-px bg-border mx-8"></div>
-  <ThreadFeed threads={threads} topUsers={topUsers} />
+  <ThreadFeed topThreads={topThreads} latestThreads={latestThreads} topUsers={topUsers} />
   <StatsBar stats={stats} />
 </BaseLayout>
