@@ -28,5 +28,33 @@ export async function onRequest(
     redirect: 'manual',
   });
 
-  return fetch(proxied);
+  const response = await fetch(proxied);
+
+  // Reconstruct redirect responses to preserve Set-Cookie headers
+  // (Cloudflare silently drops Set-Cookie from opaqueredirect responses)
+  if (response.status >= 300 && response.status < 400) {
+    const newHeaders = new Headers();
+
+    response.headers.forEach((value, name) => {
+      if (name.toLowerCase() !== 'set-cookie') {
+        newHeaders.set(name, value);
+      }
+    });
+
+    const setCookieHeader = response.headers.get('set-cookie');
+    if (setCookieHeader) {
+      // getAll() available in CF Workers for multi-value headers
+      const cookies: string[] = (response.headers as any).getAll?.('set-cookie')
+        ?? [setCookieHeader];
+      cookies.forEach(c => newHeaders.append('set-cookie', c));
+    }
+
+    return new Response(null, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: newHeaders,
+    });
+  }
+
+  return response;
 }
