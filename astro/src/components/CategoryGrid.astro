@@ -7,22 +7,25 @@ const categories = [
   { num: '05', code: 'INST', name: 'Instrumentação',   desc: 'ISA-84, SIL, IEC 61511, Automação.',       href: '/forum/c/instrumentacao-e-automacao' },
 ];
 ---
-<section class="px-8 py-9">
+<section class="px-4 sm:px-8 py-9">
   <div class="flex justify-between items-end mb-5">
     <div>
       <h2 class="text-xl font-bold text-grafite">Disciplinas Normativas</h2>
       <p class="text-sm text-gray-500 mt-1">Navegue por áreas específicas de atuação técnica.</p>
     </div>
-    <span class="text-amber text-sm font-semibold">01/05 ›</span>
+    <a href="/normas" class="text-amber text-sm font-semibold hover:underline hidden sm:block">Ver todas ›</a>
   </div>
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
     {categories.map(cat => (
       <a href={cat.href}
-         class={`block border rounded-md p-4 transition-all hover:shadow-md
+         class={`block border rounded-lg p-4 transition-all hover:shadow-md hover:-translate-y-px
            ${cat.highlight
              ? 'border-t-4 border-t-amber bg-amber-light border-x-border border-b-border'
              : 'border-t-4 border-t-border bg-white hover:border-t-blue'}`}>
-        <p class="text-gray-400 text-xs tracking-widest font-semibold mb-2">{cat.num}. {cat.code}</p>
+        <div class="flex items-start justify-between gap-2">
+          <p class="text-gray-400 text-xs tracking-widest font-semibold mb-2">{cat.num}. <span class="font-mono">{cat.code}</span></p>
+          {cat.highlight && <span class="text-[9px] font-bold text-amber tracking-widest uppercase">Em alta</span>}
+        </div>
         <h3 class="text-sm font-bold text-grafite mb-1">{cat.name}</h3>
         <p class="text-xs text-gray-500 leading-snug">{cat.desc}</p>
       </a>

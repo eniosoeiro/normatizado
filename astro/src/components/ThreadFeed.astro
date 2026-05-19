@@ -28,6 +28,29 @@ function timeAgo(dateStr: string): string {
 ---
 
 <section class="px-4 md:px-8 pb-12 pt-8 max-w-6xl mx-auto">
+
+  <!-- mobile: tags scroll + norma da semana strip (hidden on lg) -->
+  <div class="lg:hidden mb-5 space-y-3">
+    <!-- tags scroll -->
+    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none -mx-1 px-1">
+      {['nr-12','nr-13','asme-viii','abnt-nbr-5410','iso-13849','nr-35','laudo-tecnico'].map(tag => (
+        <a href={`/forum/tag/${tag}`}
+           class="flex-shrink-0 bg-blue-light text-blue text-xs font-semibold px-3 py-1.5 rounded-full border border-blue/20 hover:bg-blue hover:text-white transition-colors">
+          #{tag}
+        </a>
+      ))}
+    </div>
+    <!-- norma da semana compact -->
+    <a href="/forum/c/sst-e-seguranca-de-maquinas"
+       class="flex items-center gap-3 bg-blue rounded-xl px-4 py-3 hover:opacity-90 transition-opacity">
+      <div class="flex-1 min-w-0">
+        <p class="text-amber text-[10px] font-bold tracking-widest uppercase mb-0.5">Norma da Semana</p>
+        <p class="text-white/85 text-xs leading-snug line-clamp-1">O que muda no PGR 2026 com a nova revisão da NR-1?</p>
+      </div>
+      <span class="text-amber font-bold text-sm flex-shrink-0">→</span>
+    </a>
+  </div>
+
   <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-7">
 
     <!-- Feed -->
@@ -155,8 +178,8 @@ function timeAgo(dateStr: string): string {
       </div>
     </div>
 
-    <!-- Sidebar -->
-    <div>
+    <!-- Sidebar (desktop only) -->
+    <div class="hidden lg:block">
       <!-- Top Contributors -->
       <div class="bg-white border border-border rounded-xl p-5 mb-4">
         <h3 class="text-xs font-bold text-grafite tracking-widest uppercase mb-4">Principais Colaboradores</h3>
