@@ -1,0 +1,255 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+---
+<BaseLayout
+  title="Criar Conta Grátis"
+  description="Junte-se ao fórum técnico para engenheiros. Discussões sobre NR-12, NR-13, ASME e muito mais."
+  canonical="/cadastro"
+>
+  <Nav />
+  <main class="min-h-screen bg-bg flex items-center justify-center px-4 py-16">
+    <div class="w-full max-w-md">
+
+      <!-- header -->
+      <div class="text-center mb-8">
+        <a href="/" class="font-mono font-black text-lg tracking-widest text-grafite inline-block mb-6">
+          <span class="text-amber">[</span> NORMATIZADO <span class="text-amber">]</span>
+        </a>
+        <h1 class="text-2xl font-black text-grafite mb-2">Criar conta grátis</h1>
+        <p class="text-sm text-gray-500">Para engenheiros e inspetores que assinam ART.</p>
+      </div>
+
+      <!-- card -->
+      <div class="bg-white rounded-xl border border-border shadow-sm p-8">
+
+        <!-- google oauth -->
+        <a href="/forum/auth/google_oauth2"
+           class="w-full flex items-center justify-center gap-3 border border-border rounded-lg py-3 text-sm font-semibold text-grafite hover:bg-gray-50 transition-colors mb-6">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continuar com Google
+        </a>
+
+        <div class="relative mb-6">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-border"></div></div>
+          <div class="relative flex justify-center text-xs text-gray-400 bg-white px-3"><span>ou cadastre com e-mail</span></div>
+        </div>
+
+        <!-- form -->
+        <form id="signup-form" novalidate class="space-y-4">
+
+          <div>
+            <label for="f-email" class="block text-xs font-semibold text-grafite mb-1">E-mail</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required
+              placeholder="voce@empresa.com.br"
+              class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue/30 transition-colors" />
+            <p class="field-error text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div>
+            <label for="f-username" class="block text-xs font-semibold text-grafite mb-1">Nome de usuário</label>
+            <input id="f-username" name="username" type="text" autocomplete="username" required
+              placeholder="eng.sobrenome"
+              pattern="[a-zA-Z0-9._\-]+"
+              minlength="3" maxlength="20"
+              class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue/30 transition-colors font-mono" />
+            <p class="text-xs text-gray-400 mt-1">Letras, números, pontos, traços. Sem espaços.</p>
+            <p class="field-error text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div>
+            <label for="f-name" class="block text-xs font-semibold text-grafite mb-1">Nome completo</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required
+              placeholder="Engenheiro Silva"
+              class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue/30 transition-colors" />
+            <p class="field-error text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <div>
+            <label for="f-password" class="block text-xs font-semibold text-grafite mb-1">Senha</label>
+            <div class="relative">
+              <input id="f-password" name="password" type="password" autocomplete="new-password" required
+                placeholder="Mínimo 10 caracteres"
+                minlength="10"
+                class="w-full border border-border rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-blue focus:ring-1 focus:ring-blue/30 transition-colors pr-10" />
+              <button type="button" id="toggle-pw"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-grafite transition-colors text-xs">
+                👁
+              </button>
+            </div>
+            <p class="field-error text-red-500 text-xs mt-1 hidden"></p>
+          </div>
+
+          <!-- global error -->
+          <div id="global-error" class="hidden bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-4 py-3"></div>
+
+          <button type="submit" id="submit-btn"
+            class="w-full bg-amber text-grafite font-bold py-3 rounded-lg text-sm tracking-wide hover:bg-yellow-400 transition-colors flex items-center justify-center gap-2 mt-2">
+            <span id="btn-text">CRIAR CONTA GRÁTIS</span>
+            <svg id="btn-arrow" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            <svg id="btn-spinner" class="hidden animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 22 6.477 22 12h-4z"></path>
+            </svg>
+          </button>
+
+        </form>
+
+        <!-- success state (hidden) -->
+        <div id="success-msg" class="hidden text-center py-4">
+          <div class="text-4xl mb-3">✅</div>
+          <h2 class="font-bold text-grafite mb-1">Conta criada!</h2>
+          <p class="text-sm text-gray-500 mb-4">Verifique seu e-mail para confirmar o cadastro.</p>
+          <a href="/forum" class="inline-block bg-blue text-white font-bold text-sm px-6 py-2.5 rounded-lg hover:bg-blue-dark transition-colors">
+            Ir para o fórum →
+          </a>
+        </div>
+
+      </div>
+
+      <p class="text-center text-sm text-gray-500 mt-6">
+        Já tem conta?
+        <a href="/forum/login" class="text-blue font-semibold hover:underline">Entrar</a>
+      </p>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('signup-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text')!;
+  const btnArrow = document.getElementById('btn-arrow')!;
+  const btnSpinner = document.getElementById('btn-spinner')!;
+  const globalError = document.getElementById('global-error')!;
+  const successMsg = document.getElementById('success-msg')!;
+  const togglePw = document.getElementById('toggle-pw')!;
+  const pwField = document.getElementById('f-password') as HTMLInputElement;
+
+  togglePw.addEventListener('click', () => {
+    pwField.type = pwField.type === 'password' ? 'text' : 'password';
+  });
+
+  function setLoading(on: boolean) {
+    submitBtn.disabled = on;
+    btnText.textContent = on ? 'Criando conta...' : 'CRIAR CONTA GRÁTIS';
+    btnArrow.classList.toggle('hidden', on);
+    btnSpinner.classList.toggle('hidden', !on);
+  }
+
+  function showError(msg: string) {
+    globalError.textContent = msg;
+    globalError.classList.remove('hidden');
+  }
+
+  function clearErrors() {
+    globalError.classList.add('hidden');
+    document.querySelectorAll('.field-error').forEach(el => {
+      el.classList.add('hidden');
+      el.textContent = '';
+    });
+    document.querySelectorAll('input').forEach(el => {
+      el.classList.remove('border-red-400');
+    });
+  }
+
+  function showFieldError(inputId: string, msg: string) {
+    const input = document.getElementById(inputId)!;
+    const errEl = input.parentElement?.querySelector('.field-error') ?? input.nextElementSibling?.nextElementSibling;
+    input.classList.add('border-red-400');
+    if (errEl && errEl.classList.contains('field-error')) {
+      errEl.textContent = msg;
+      errEl.classList.remove('hidden');
+    }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    const email = (document.getElementById('f-email') as HTMLInputElement).value.trim();
+    const username = (document.getElementById('f-username') as HTMLInputElement).value.trim();
+    const name = (document.getElementById('f-name') as HTMLInputElement).value.trim();
+    const password = pwField.value;
+
+    // client-side validation
+    let hasError = false;
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showFieldError('f-email', 'E-mail inválido.');
+      hasError = true;
+    }
+    if (!username || username.length < 3 || !/^[a-zA-Z0-9._\-]+$/.test(username)) {
+      showFieldError('f-username', 'Mínimo 3 caracteres. Sem espaços ou caracteres especiais.');
+      hasError = true;
+    }
+    if (!name || name.length < 2) {
+      showFieldError('f-name', 'Informe seu nome completo.');
+      hasError = true;
+    }
+    if (!password || password.length < 10) {
+      showFieldError('f-password', 'Senha deve ter no mínimo 10 caracteres.');
+      hasError = true;
+    }
+    if (hasError) return;
+
+    setLoading(true);
+
+    try {
+      // fetch CSRF token from Discourse
+      const csrfRes = await fetch('/forum/session/csrf.json', {
+        credentials: 'include',
+        headers: { 'Accept': 'application/json' },
+      });
+      if (!csrfRes.ok) throw new Error('Falha ao conectar com o servidor.');
+      const { csrf } = await csrfRes.json() as { csrf: string };
+
+      // register user
+      const res = await fetch('/forum/users.json', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': csrf,
+        },
+        body: JSON.stringify({ email, username, name, password, active: 'true' }),
+      });
+
+      const data = await res.json() as {
+        success?: boolean;
+        message?: string;
+        errors?: Record<string, string[]>;
+        active?: boolean;
+      };
+
+      if (data.success === false || res.status >= 400) {
+        if (data.errors) {
+          const msgs = Object.entries(data.errors)
+            .flatMap(([k, v]) => v.map(m => `${k}: ${m}`))
+            .join('. ');
+          showError(msgs || data.message || 'Erro ao criar conta.');
+        } else {
+          showError(data.message || 'Erro ao criar conta. Tente novamente.');
+        }
+        return;
+      }
+
+      // success
+      form.classList.add('hidden');
+      successMsg.classList.remove('hidden');
+
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Erro de conexão. Tente novamente.';
+      showError(msg);
+    } finally {
+      setLoading(false);
+    }
+  });
+</script>
